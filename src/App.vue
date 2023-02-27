@@ -1,29 +1,23 @@
 <template>
-  <div class="header">
+  <app-header />
 
-  </div>
-  <div class="content">
-    <Main></Main>
-  </div>
-  <div class="footer">
+  <router-view />
 
-  </div>
+  <app-footer />
 </template>
 
 <script>
 
-import Main from "@/components/Main";
+import { mapActions } from 'vuex';
+import AppHeader from '@/components/Header';
+import AppFooter from '@/components/Footer';
 
 export default {
-
-  components: {
-    Main
-  },
-  data() {
-    return {
-
-    }
-  }
+  components: { AppHeader, AppFooter },
+	methods: mapActions(['fetchProducts']),
+	async created() {
+		await this.fetchProducts();
+	},
 }
 </script>
 
@@ -32,22 +26,13 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+  text-decoration: none;
+  color: #0A1E32;
 }
 
-.header {
-  height: 75px;
-  border-bottom: 1px solid black;
-  background: #ffffff;
+#app {
+  height: 100vh;
 }
 
-.footer {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  position: fixed;
-  display: flex;
-  height: 96px;
-  background: #0A1E32;
-  margin-top: 20px;
-}
 </style>
